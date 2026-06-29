@@ -1,32 +1,49 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  --bg-page: #F8F7F5;
+  /* Surfaces */
+  --bg-page: #F5F5F5;
   --bg-surface: #FFFFFF;
-  --bg-hover: #F3F1EE;
-  --border-subtle: #E8E5E1;
-  --border-default: #D4D0C8;
-  --text-primary: #1A1917;
-  --text-secondary: #57534E;
-  --text-tertiary: #A8A29E;
+  --bg-hover: #F0F0F0;
+
+  /* Borders */
+  --border-subtle: #EBEBEB;
+  --border-default: #D9D9D9;
+
+  /* Text */
+  --text-primary: #050505;
+  --text-secondary: #545454;
+  --text-tertiary: #9E9E9E;
+
+  /* Accent */
   --accent: #610042;
   --accent-hover: #4A0032;
-  --accent-subtle: #F9EEF4;
-  --accent-border: #D4A0BC;
-  --danger: #C0392B;
-  --danger-bg: #FDECEA;
-  --warning: #C47A1E;
-  --warning-bg: #FDF3E3;
-  --success: #2E7D52;
-  --success-bg: #EAF5EE;
-  --neutral: #6B6560;
-  --neutral-bg: #F3F1EE;
-  --card-rose: #FDF0F5;
-  --card-sand: #FBF7F0;
-  --card-mist: #F4F0F8;
+  --accent-subtle: #F5E8EF;
+  --accent-border: #C87BA4;
+
+  /* Semantic */
+  --danger: #D41414;
+  --danger-bg: #FFF0F0;
+  --warning: #B87A00;
+  --warning-bg: #FFF8EC;
+  --success: #1A7A2E;
+  --success-bg: #EBF7EC;
+  --neutral: #767676;
+  --neutral-bg: #F0F0F0;
+
+  /* Card tints — neutralised */
+  --card-rose: #F9EEF4;
+  --card-sand: #F5F5F5;
+  --card-mist: #EFF0F6;
+
+  /* Sidebar */
+  --sidebar-bg: #111111;
+  --sidebar-icon: #737373;
+  --sidebar-icon-active: #FFFFFF;
+  --sidebar-active-bg: rgba(255,255,255,0.08);
 }
 
 * {
@@ -41,6 +58,7 @@ body {
   font-size: 14px;
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 #root {
@@ -61,8 +79,9 @@ body {
 
 h1, h2, h3, h4, h5, h6 {
   margin: 0;
-  font-weight: 600;
+  font-weight: 700;
   color: var(--text-primary);
+  letter-spacing: -0.01em;
 }
 
 p {

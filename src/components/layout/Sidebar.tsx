@@ -1,7 +1,6 @@
 import { NavLink, useLocation } from 'react-router-dom';
 import { LayoutDashboard, Users, FileText, Coins, CheckSquare } from 'lucide-react';
 import { useState } from 'react';
-import { Avatar } from '../ui/Avatar';
 import { currentUser } from '../../data/mockData';
 
 const navItems = [
@@ -17,14 +16,14 @@ export function Sidebar() {
   const location = useLocation();
 
   return (
-    <aside className="fixed left-0 top-0 h-full w-14 bg-bg-surface border-r border-border-subtle flex flex-col items-center py-3 z-30">
-      {/* Logo mark */}
-      <div className="w-8 h-8 flex items-center justify-center mb-6">
-        <span className="text-accent font-bold text-[13px] tracking-tight leading-none">MMV</span>
+    <aside className="fixed left-0 top-0 h-full w-14 bg-sidebar-bg flex flex-col items-center py-4 z-30">
+      {/* Logo */}
+      <div className="w-8 h-8 flex items-center justify-center mb-7">
+        <span className="text-white font-black text-[13px] tracking-tight leading-none">MMV</span>
       </div>
 
       {/* Nav */}
-      <nav className="flex flex-col items-center gap-1 flex-1">
+      <nav className="flex flex-col items-center gap-0.5 flex-1">
         {navItems.map(({ icon: Icon, label, path }) => {
           const isActive =
             path === '/' ? location.pathname === '/' : location.pathname.startsWith(path);
@@ -33,16 +32,20 @@ export function Sidebar() {
               <NavLink
                 to={path}
                 aria-label={label}
-                className={`w-10 h-10 flex items-center justify-center rounded-lg transition-colors ${
+                className={`w-10 h-10 flex items-center justify-center rounded-lg transition-all ${
                   isActive
-                    ? 'bg-accent-subtle text-accent'
-                    : 'text-text-tertiary hover:bg-bg-hover hover:text-text-primary'
+                    ? 'bg-white/10 text-white'
+                    : 'text-sidebar-icon hover:bg-white/6 hover:text-white'
                 }`}
               >
-                <Icon size={18} />
+                <Icon size={18} strokeWidth={isActive ? 2 : 1.75} />
               </NavLink>
+              {/* Active indicator — left edge bar */}
+              {isActive && (
+                <div className="absolute left-0 top-1/2 -translate-y-1/2 w-0.5 h-5 bg-accent rounded-r-full -ml-0" />
+              )}
               {/* Tooltip */}
-              <div className="absolute left-full ml-2 top-1/2 -translate-y-1/2 px-2 py-1 bg-text-primary text-white text-[12px] rounded-md whitespace-nowrap opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity z-50">
+              <div className="absolute left-full ml-3 top-1/2 -translate-y-1/2 px-2.5 py-1.5 bg-[#1A1A1A] border border-white/10 text-white text-[12px] font-medium rounded-lg whitespace-nowrap opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity z-50 shadow-panel">
                 {label}
               </div>
             </div>
@@ -54,24 +57,24 @@ export function Sidebar() {
       <div className="relative">
         <button
           onClick={() => setShowUserMenu(!showUserMenu)}
-          className="focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 rounded-full"
+          className="w-7 h-7 rounded-full bg-white/15 text-white text-[11px] font-bold flex items-center justify-center hover:bg-white/25 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-sidebar-bg"
           aria-label="User menu"
         >
-          <Avatar initials={currentUser.initials} size="sm" />
+          {currentUser.initials}
         </button>
 
         {showUserMenu && (
           <>
             <div className="fixed inset-0 z-40" onClick={() => setShowUserMenu(false)} />
-            <div className="absolute left-full ml-2 bottom-0 w-52 bg-bg-surface border border-border-default rounded-xl shadow-lg z-50 py-2">
-              <div className="px-3 py-2 border-b border-border-subtle mb-1">
-                <p className="text-[14px] font-medium text-text-primary">{currentUser.name}</p>
-                <p className="text-[12px] text-text-tertiary">Relationship Manager</p>
+            <div className="absolute left-full ml-3 bottom-0 w-52 bg-bg-surface border border-border-subtle rounded-xl shadow-panel z-50 py-2 overflow-hidden">
+              <div className="px-3 py-2.5 border-b border-border-subtle mb-1">
+                <p className="text-[14px] font-semibold text-text-primary">{currentUser.name}</p>
+                <p className="text-[12px] text-text-tertiary mt-0.5">Relationship Manager</p>
               </div>
               {['Account settings', 'Manage users', 'Sign out'].map((item) => (
                 <button
                   key={item}
-                  className="w-full text-left px-3 py-2 text-[14px] text-text-secondary hover:bg-bg-hover transition-colors"
+                  className="w-full text-left px-3 py-2 text-[14px] text-text-secondary hover:bg-bg-hover hover:text-text-primary transition-colors"
                 >
                   {item}
                 </button>

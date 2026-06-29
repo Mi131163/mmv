@@ -10,11 +10,7 @@ interface HeaderProps {
 
 const searchResults: Record<string, { name: string; meta: string; path: string }[]> = {
   Donors: [
-    {
-      name: 'Bill & Melinda Gates Foundation',
-      meta: 'Philanthropic · Active',
-      path: '/donors/donor-1',
-    },
+    { name: 'Bill & Melinda Gates Foundation', meta: 'Philanthropic · Active', path: '/donors/donor-1' },
     { name: 'USAID — Global Health Bureau', meta: 'Government · Active', path: '/donors/donor-2' },
     { name: 'Wellcome Trust', meta: 'Philanthropic · Active', path: '/donors/donor-3' },
     { name: 'UNITAID', meta: 'Multilateral · Active', path: '/donors/donor-4' },
@@ -35,7 +31,7 @@ export function Header({ title }: HeaderProps) {
 
   return (
     <header className="fixed top-0 left-14 right-0 h-12 bg-bg-surface border-b border-border-subtle flex items-center px-5 gap-4 z-20">
-      <h1 className="text-[17px] font-semibold text-text-primary whitespace-nowrap">{title}</h1>
+      <h1 className="text-[17px] font-bold text-text-primary whitespace-nowrap tracking-tight">{title}</h1>
 
       {/* Search */}
       <div className="flex-1 flex justify-center">
@@ -48,7 +44,7 @@ export function Header({ title }: HeaderProps) {
             onFocus={() => setSearchFocused(true)}
             onBlur={() => setTimeout(() => setSearchFocused(false), 150)}
             placeholder="Search donors, grants…"
-            className="w-full h-8 pl-8 pr-10 bg-bg-page border border-border-default rounded-lg text-[13px] text-text-primary placeholder:text-text-tertiary focus:outline-none focus:border-accent transition-colors"
+            className="w-full h-8 pl-8 pr-10 bg-bg-page border border-border-subtle rounded-lg text-[13px] text-text-primary placeholder:text-text-tertiary focus:outline-none focus:border-text-primary focus:bg-bg-surface transition-all"
           />
           {!searchFocused && (
             <span className="absolute right-3 top-1/2 -translate-y-1/2 text-[11px] text-text-tertiary font-mono select-none">
@@ -56,10 +52,10 @@ export function Header({ title }: HeaderProps) {
             </span>
           )}
           {searchFocused && (
-            <div className="absolute top-full mt-1 left-0 right-0 bg-bg-surface border border-border-default rounded-xl shadow-lg z-50 py-2 min-w-[340px]">
+            <div className="absolute top-full mt-1.5 left-0 right-0 bg-bg-surface border border-border-default rounded-xl shadow-panel z-50 py-2 min-w-[340px] overflow-hidden">
               {Object.entries(searchResults).map(([category, items]) => (
                 <div key={category}>
-                  <div className="px-3 py-1.5 text-[11px] font-semibold text-text-tertiary uppercase tracking-[0.05em]">
+                  <div className="px-3 py-1.5 text-[11px] font-bold text-text-tertiary uppercase tracking-[0.06em]">
                     {category}
                   </div>
                   {items.map((item) => (
@@ -68,15 +64,15 @@ export function Header({ title }: HeaderProps) {
                       onMouseDown={() => navigate(item.path)}
                       className="w-full flex items-center gap-3 px-3 py-2 hover:bg-bg-hover transition-colors text-left"
                     >
-                      <div className="w-6 h-6 rounded bg-accent-subtle flex items-center justify-center flex-shrink-0">
+                      <div className="w-6 h-6 rounded-md bg-neutral-bg flex items-center justify-center flex-shrink-0">
                         {category === 'Donors' ? (
-                          <Users size={12} className="text-accent" />
+                          <Users size={12} className="text-text-secondary" />
                         ) : (
-                          <Coins size={12} className="text-accent" />
+                          <Coins size={12} className="text-text-secondary" />
                         )}
                       </div>
                       <div className="min-w-0">
-                        <p className="text-[13px] text-text-primary truncate">{item.name}</p>
+                        <p className="text-[13px] font-medium text-text-primary truncate">{item.name}</p>
                         <p className="text-[11px] text-text-tertiary">{item.meta}</p>
                       </div>
                     </button>
@@ -90,20 +86,20 @@ export function Header({ title }: HeaderProps) {
 
       <div className="flex items-center gap-1">
         <button
-          className="w-8 h-8 flex items-center justify-center text-text-secondary hover:text-text-primary hover:bg-bg-hover rounded-lg transition-colors"
+          className="w-8 h-8 flex items-center justify-center text-text-tertiary hover:text-text-primary hover:bg-bg-hover rounded-lg transition-colors"
           aria-label="Calendar"
         >
-          <Calendar size={17} />
+          <Calendar size={16} strokeWidth={1.75} />
         </button>
 
         {/* Notifications */}
         <div className="relative">
           <button
             onClick={() => setShowNotifications(!showNotifications)}
-            className="w-8 h-8 flex items-center justify-center text-text-secondary hover:text-text-primary hover:bg-bg-hover rounded-lg transition-colors relative"
+            className="w-8 h-8 flex items-center justify-center text-text-tertiary hover:text-text-primary hover:bg-bg-hover rounded-lg transition-colors relative"
             aria-label="Notifications"
           >
-            <Bell size={17} />
+            <Bell size={16} strokeWidth={1.75} />
             {unreadCount > 0 && (
               <span className="absolute top-1.5 right-1.5 w-1.5 h-1.5 bg-danger rounded-full" />
             )}
@@ -112,10 +108,10 @@ export function Header({ title }: HeaderProps) {
           {showNotifications && (
             <>
               <div className="fixed inset-0 z-40" onClick={() => setShowNotifications(false)} />
-              <div className="absolute right-0 top-full mt-1.5 w-[360px] max-h-[480px] bg-bg-surface border border-border-default rounded-xl shadow-lg z-50 overflow-hidden flex flex-col">
+              <div className="absolute right-0 top-full mt-1.5 w-[360px] max-h-[480px] bg-bg-surface border border-border-subtle rounded-xl shadow-panel z-50 overflow-hidden flex flex-col">
                 <div className="flex items-center justify-between px-4 py-3 border-b border-border-subtle flex-shrink-0">
-                  <h3 className="text-[15px] font-semibold text-text-primary">Notifications</h3>
-                  <button className="text-[13px] text-accent hover:text-accent-hover transition-colors">
+                  <h3 className="text-[15px] font-bold text-text-primary tracking-tight">Notifications</h3>
+                  <button className="text-[13px] text-text-tertiary hover:text-text-primary transition-colors">
                     Mark all read
                   </button>
                 </div>
@@ -124,7 +120,7 @@ export function Header({ title }: HeaderProps) {
                     <div
                       key={n.id}
                       className={`px-4 py-3 border-b border-border-subtle last:border-0 hover:bg-bg-hover transition-colors ${
-                        !n.read ? 'bg-accent-subtle' : ''
+                        !n.read ? 'bg-bg-hover' : ''
                       }`}
                     >
                       <div className="flex items-start gap-2.5">
@@ -132,9 +128,9 @@ export function Header({ title }: HeaderProps) {
                           <div className="w-1.5 h-1.5 rounded-full bg-accent mt-1.5 flex-shrink-0" />
                         )}
                         <div className={!n.read ? '' : 'pl-4'}>
-                          <p className="text-[14px] font-medium text-text-primary">{n.title}</p>
-                          <p className="text-[13px] text-text-secondary mt-0.5">{n.description}</p>
-                          <p className="text-[11px] text-text-tertiary mt-1">{n.time}</p>
+                          <p className="text-[13px] font-semibold text-text-primary">{n.title}</p>
+                          <p className="text-[13px] text-text-secondary mt-0.5 leading-snug">{n.description}</p>
+                          <p className="text-[11px] text-text-tertiary mt-1.5">{n.time}</p>
                         </div>
                       </div>
                     </div>
