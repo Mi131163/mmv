@@ -4,7 +4,7 @@ A presale prototype for a donor relationship management system used by Relations
 
 ## Live Demo
 
-Deployed to GitHub Pages: `https://Mi131163.github.io/estimator/`
+Deployed to GitHub Pages: `https://Mi131163.github.io/mmv/`
 
 ## Tech Stack
 
